@@ -4,20 +4,50 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [state, setState] = useState({
-    squares: Array(9).fill(null),
+    history: [{ squares: Array(9).fill(null) }],
     isNextX: true,
+    stepNumber: 0,
   });
 
   const handleClick = (position) => {
-    const squares = state.squares.slice();
+    const history = state.history.slice(0, state.stepNumber + 1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
     if (desideWinner(squares) || squares[position]) {
       return;
     }
     squares[position] = state.isNextX ? "X" : "O";
     setState({
-      squares,
+      history: history.concat([{ squares }]),
       isNextX: !state.isNextX,
+      stepNumber: history.length,
     });
+  };
+
+  const undo = () => {
+    state.stepNumber &&
+      setState({
+        ...state,
+        stepNumber: state.stepNumber - 1,
+        isNextX: state.stepNumber % 2 === 0,
+      });
+  };
+
+  const restart = () => {
+    setState({
+      ...state,
+      isNextX: true,
+      stepNumber: 0,
+    });
+  };
+
+  const redo = () => {
+    state.history.length - 1 > state.stepNumber &&
+      setState({
+        ...state,
+        stepNumber: state.stepNumber + 1,
+        isNextX: state.stepNumber % 2 === 0,
+      });
   };
 
   const desideWinner = (squares) => {
@@ -39,14 +69,31 @@ const AppProvider = ({ children }) => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return squares[a];
+        return `Winner ${squares[a]}`;
       }
+    }
+    if (!squares.includes(null)) {
+      return `It's a draw.`;
     }
     return null;
   };
 
+  const history = state.history;
+  const current = history[state.stepNumber];
+  const winner = desideWinner(current.squares);
+
+  let status;
+
+  if (winner) {
+    status = winner;
+  } else {
+    status = `Next PLayer :  ${state.isNextX ? "X" : "O"}`;
+  }
+
   return (
-    <AppContext.Provider value={{ ...state, handleClick }}>
+    <AppContext.Provider
+      value={{ ...state, handleClick, status, current, undo, restart, redo }}
+    >
       {children}
     </AppContext.Provider>
   );

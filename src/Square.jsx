@@ -2,11 +2,10 @@ import React from "react";
 import { useGlobalContext } from "./context";
 
 const Square = ({ position }) => {
-  const { squares, handleClick } = useGlobalContext();
-
+  const { current, handleClick } = useGlobalContext();
   return (
     <button className="btn square-btn" onClick={() => handleClick(position)}>
-      {squares[position]}
+      {current.squares[position]}
     </button>
   );
 };
