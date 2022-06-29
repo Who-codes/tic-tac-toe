@@ -109,7 +109,14 @@ main {
   width: 5rem;
   height: 5rem;
   font-size: 3rem;
+  color: var(--clr-dark);
   border: 2px rgba(0, 0, 0, 0.719) solid;
+}
+
+.square-btn:hover,
+.square-btn:active {
+  text-decoration: none;
+  transform: none;
 }
 
 section {

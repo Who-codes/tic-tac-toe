@@ -1,7 +1,14 @@
 import React from "react";
+import { useGlobalContext } from "./context";
 
 const Square = ({ position }) => {
-  return <button className="btn square-btn">{position}</button>;
+  const { squares, handleClick } = useGlobalContext();
+
+  return (
+    <button className="btn square-btn" onClick={() => handleClick(position)}>
+      {squares[position]}
+    </button>
+  );
 };
 
 export default Square;

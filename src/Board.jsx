@@ -1,15 +1,14 @@
 import React from "react";
-import { useGlobalContent } from "./content";
 import Square from "./Square";
 
 const Board = () => {
-  const renderSquares = [];
+  const renderSquare = [];
 
   for (let i = 0; i < 9; i++) {
-    renderSquares[i] = <Square position={i} key={i} />;
+    renderSquare[i] = <Square position={i} key={i} />;
   }
 
-  return <div className="board">{renderSquares.map((item) => item)}</div>;
+  return <div className="board">{renderSquare.map((i) => i)}</div>;
 };
 
 export default Board;

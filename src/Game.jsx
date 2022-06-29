@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import Board from "./Board";
-import { useGlobalContent } from "./content";
 
 const Game = () => {
   return (
