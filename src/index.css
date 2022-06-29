@@ -81,6 +81,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   width: 90%;
+  max-width: 1350px;
 }
 
 .nav-links {
@@ -98,6 +99,11 @@ main {
   height: calc(100vh - 5rem);
   display: grid;
   place-content: center;
+}
+
+.game {
+  padding: 2rem;
+  max-width: 800px;
 }
 
 .game-components {
@@ -122,6 +128,7 @@ main {
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 800px;
 }
 
 .square-btn {
@@ -161,4 +168,20 @@ section p {
   background-color: var(--clr-dark);
   color: var(--clr-lighter);
   border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 1em;
+  }
+
+  .square-btn {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+    font-size: 1.5em;
+  }
 }

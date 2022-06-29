@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
     const history = state.history.slice(0, state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (desideWinner(squares) || squares[position]) {
+    if (decideResult(squares) || squares[position]) {
       return;
     }
     squares[position] = state.isNextX ? "X" : "O";
@@ -50,7 +50,7 @@ const AppProvider = ({ children }) => {
       });
   };
 
-  const desideWinner = (squares) => {
+  const decideResult = (squares) => {
     const lists = [
       [0, 1, 2],
       [3, 4, 5],
@@ -80,7 +80,9 @@ const AppProvider = ({ children }) => {
 
   const history = state.history;
   const current = history[state.stepNumber];
-  const winner = desideWinner(current.squares);
+  const winner = decideResult(current.squares);
+
+  console.log(winnerList);
 
   let status;
 
@@ -92,7 +94,15 @@ const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, handleClick, status, current, undo, restart, redo }}
+      value={{
+        ...state,
+        handleClick,
+        status,
+        current,
+        undo,
+        restart,
+        redo,
+      }}
     >
       {children}
     </AppContext.Provider>
