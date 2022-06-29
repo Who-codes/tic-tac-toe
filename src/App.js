@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Error from "./Error";
+import Game from "./Game";
 import Help from "./Help";
-import { Home } from "./Home";
 import Navbar from "./Navbar";
 
 const App = () => {
@@ -9,8 +10,9 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Game />} />
         <Route path="/help" element={<Help />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
