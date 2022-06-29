@@ -82,14 +82,12 @@ const AppProvider = ({ children }) => {
   const current = history[state.stepNumber];
   const winner = decideResult(current.squares);
 
-  console.log(winnerList);
-
   let status;
 
   if (winner) {
     status = winner;
   } else {
-    status = `Next PLayer :  ${state.isNextX ? "X" : "O"}`;
+    status = ` PLayer :  ${state.isNextX ? "X" : "O"}`;
   }
 
   return (
