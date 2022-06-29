@@ -154,6 +154,7 @@ section {
 
 .section-center {
   width: 80%;
+  max-width: 800px;
   text-align: center;
 }
 
